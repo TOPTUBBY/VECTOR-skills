@@ -1,9 +1,9 @@
 # VECTOR Skills
 
 **Community AI skills for Vector CANoe and vTESTstudio**  
-Maintainer: **Patiphan Phakdeeburi (TOPTUBBY)** ? Skill version: **0.1.0** ? [MIT license](LICENSE)
+Maintainer: **Patiphan Phakdeeburi (TOPTUBBY)** · Skill version: **0.1.0** · [MIT license](LICENSE)
 
-> �����ͪ������ AI �¡���ҷ CANoe �Ѻ vTESTstudio, ��ҧ�ԧ�͡��õ�������ѹ, ��е�Ǩ compatibility ��͹�йӢ�鹵͹������¹ CAPL/test unit �͡��õ鹩�Ѻ�ͧ Vector ���������ͧ��������������ѻ��Ŵŧ����Ҹ�ó�
+> คู่มือช่วยให้ AI แยกบทบาท CANoe กับ vTESTstudio, อ้างอิงเอกสารตามเวอร์ชัน, และตรวจ compatibility ก่อนแนะนำขั้นตอนหรือเขียน CAPL/test unit เอกสารต้นฉบับของ Vector อยู่ในเครื่องผู้ใช้และไม่ได้อัปโหลดลงรีโปสาธารณะ
 
 ![CANoe and vTESTstudio workflow](assets/workflow.svg)
 
@@ -32,17 +32,17 @@ An older CANoe **test environment** (`*.TSE`) is distinct from the newer test-un
 
 ```text
 VECTOR-skills/
-?�� .agents/skills/vector-canoe-vtest/SKILL.md   # Codex repository entry
-?�� .claude/skills/vector-canoe-vtest/SKILL.md  # Claude Code entry
-?�� skills/vector-canoe-vtest/
-�   ?�� SKILL.md                                # Canonical instructions
-�   ?�� references/                            # Versioned, original summaries
-�   ��� scripts/search_help.py                 # Search your own local HTML Help
-?�� gemini/GEM_INSTRUCTIONS.md                 # Paste into a Gemini Gem
-?�� assets/workflow.svg                        # Original diagram
-?�� VERSION
-?�� CHANGELOG.md
-��� LICENSE
+├── .agents/skills/vector-canoe-vtest/SKILL.md   # Codex repository entry
+├── .claude/skills/vector-canoe-vtest/SKILL.md  # Claude Code entry
+├── skills/vector-canoe-vtest/
+│   ├── SKILL.md                                # Canonical instructions
+│   ├── references/                            # Versioned, original summaries
+│   └── scripts/search_help.py                 # Search your own local HTML Help
+├── gemini/GEM_INSTRUCTIONS.md                 # Paste into a Gemini Gem
+├── assets/workflow.svg                        # Original diagram
+├── VERSION
+├── CHANGELOG.md
+└── LICENSE
 ```
 
 The wrappers link to the canonical skill so cross-platform guidance stays consistent. They need the **whole repository** or a copy preserving the relative paths. No Vector proprietary manuals are bundled.
@@ -51,7 +51,7 @@ The wrappers link to the canonical skill so cross-platform guidance stays consis
 
 ### ChatGPT Work / Codex
 
-Clone or download the repository. In a Codex project, keep `.agents/skills/vector-canoe-vtest/SKILL.md` and the canonical `skills/` folder together, or copy the **entire** `skills/vector-canoe-vtest/` directory into the Codex skills location configured for your installation. If ChatGPT Work offers custom skill import, import that complete canonical skill directory through its UI. In a chat, ask: �Use the vector-canoe-vtest skill to explain a CANoe 14 CAPL test node.� Check your Work environment's current skill-import workflow; a GitHub URL alone does not automatically install a skill.
+Clone or download the repository. In a Codex project, keep `.agents/skills/vector-canoe-vtest/SKILL.md` and the canonical `skills/` folder together, or copy the **entire** `skills/vector-canoe-vtest/` directory into the Codex skills location configured for your installation. If ChatGPT Work offers custom skill import, import that complete canonical skill directory through its UI. In a chat, ask: “Use the vector-canoe-vtest skill to explain a CANoe 14 CAPL test node.” Check your Work environment's current skill-import workflow; a GitHub URL alone does not automatically install a skill.
 
 ### Claude Code
 
@@ -88,10 +88,10 @@ Vector links to the [CANoe DE Family online Help](https://help.vector.com/CANoeD
 
 ## Example prompts
 
-- �CANoe 14 SP2: explain Network Node vs Test Unit and where each CAPL file belongs.�
-- �vTESTstudio 6 SP3 + CANoe 14: review these Test Table commands for runtime compatibility.�
-- �My `.vtuexe` builds but fails when added to CANoe. Give a diagnosis checklist with Help topics.�
-- �Compare CANoe 14 and 19 for this specific Replay Block workflow; mark unverified APIs.�
+- “CANoe 14 SP2: explain Network Node vs Test Unit and where each CAPL file belongs.”
+- “vTESTstudio 6 SP3 + CANoe 14: review these Test Table commands for runtime compatibility.”
+- “My `.vtuexe` builds but fails when added to CANoe. Give a diagnosis checklist with Help topics.”
+- “Compare CANoe 14 and 19 for this specific Replay Block workflow; mark unverified APIs.”
 
 ## Releases, authorship, and rights
 
