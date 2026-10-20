@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="310" viewBox="0 0 1100 310" role="img" aria-labelledby="title desc">
+  <title id="title">CANoe and vTESTstudio workflow</title><desc id="desc">vTESTstudio creates a test unit, CANoe executes it against simulated or real network nodes, and results flow into a test report.</desc>
+  <rect width="1100" height="310" rx="24" fill="#f5f8fc"/>
+  <text x="45" y="50" fill="#152c45" font-family="Arial,sans-serif" font-size="25" font-weight="700">Vector test workflow for AI assistants</text>
+  <rect x="45" y="90" width="220" height="135" rx="14" fill="#163d63"/>
+  <text x="65" y="133" fill="white" font-family="Arial,sans-serif" font-size="20" font-weight="700">vTESTstudio</text>
+  <text x="65" y="166" fill="#dbeaf9" font-family="Arial,sans-serif" font-size="15">Design and build tests</text>
+  <text x="65" y="193" fill="#dbeaf9" font-family="Arial,sans-serif" font-size="15">.vtuexe test unit</text>
+  <path d="M275 157h68" stroke="#3173a9" stroke-width="5" stroke-linecap="round"/><path d="m344 157-13-10v20z" fill="#3173a9"/>
+  <rect x="355" y="90" width="302" height="135" rx="14" fill="#176898"/>
+  <text x="376" y="133" fill="white" font-family="Arial,sans-serif" font-size="20" font-weight="700">CANoe test setup</text>
+  <text x="376" y="166" fill="#e2f5ff" font-family="Arial,sans-serif" font-size="15">Execute, stimulate, check</text>
+  <text x="376" y="193" fill="#e2f5ff" font-family="Arial,sans-serif" font-size="15">Simulation or real bus</text>
+  <path d="M667 157h68" stroke="#3173a9" stroke-width="5" stroke-linecap="round"/><path d="m736 157-13-10v20z" fill="#3173a9"/>
+  <rect x="747" y="90" width="305" height="135" rx="14" fill="#217d79"/>
+  <text x="768" y="133" fill="white" font-family="Arial,sans-serif" font-size="20" font-weight="700">Evidence and report</text>
+  <text x="768" y="166" fill="#e7fffa" font-family="Arial,sans-serif" font-size="15">Test Trace, verdict, logs</text>
+  <text x="768" y="193" fill="#e7fffa" font-family="Arial,sans-serif" font-size="15">Reproduce and diagnose</text>
+  <text x="45" y="268" fill="#435d75" font-family="Arial,sans-serif" font-size="15">Network nodes simulate behavior in CANoe; test units check it. Verify APIs and compatibility for the installed version.</text>
+</svg>
