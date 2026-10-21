@@ -1,7 +1,7 @@
 # VECTOR Skills
 
 **Community AI skills for Vector CANoe and vTESTstudio**  
-Maintainer: **Patiphan Phakdeeburi (TOPTUBBY)** · Skill version: **0.2.0** · [MIT license](LICENSE)
+Maintainer: **Patiphan Phakdeeburi (TOPTUBBY)** · Skill version: **0.3.0** · [MIT license](LICENSE)
 
 > คู่มือช่วยให้ AI แยกบทบาท CANoe กับ vTESTstudio, อ้างอิงเอกสารตามเวอร์ชัน, และตรวจ compatibility ก่อนแนะนำขั้นตอนหรือเขียน CAPL/test unit เอกสารต้นฉบับของ Vector อยู่ในเครื่องผู้ใช้และไม่ได้อัปโหลดลงรีโปสาธารณะ
 
@@ -17,6 +17,10 @@ Maintainer: **Patiphan Phakdeeburi (TOPTUBBY)** · Skill version: **0.2.0** · [
 | CANoe 19 | Vector's online Help/release links, official announcement, compatibility matrix | Bounded comparison to 14, links to verify current details; no claim of full v19 Help ingestion |
 
 The [CAPL basics guide](skills/vector-canoe-vtest/references/capl-basics.md) now covers `msTimer`, `setTimer`, `on timer`, `writeEx`, and `sysGetVariableString` with CANoe 14 SP2 syntax, short examples, and local Help topic paths. It is a starter guide, not a complete function catalog; the skill instructs an AI to check the matching Help for any other function or version.
+
+**Full function coverage from your own installation:** [build a private local corpus](skills/vector-canoe-vtest/references/local-corpus.md) with `local_corpus.py`. It indexes supplied HTML Help and locally extracted CHM pages, preserves each page's full local text and examples, and extracts recognizable function syntax for exact-name lookup. Optional `pypdf` adds PDF page text. Run `stats` to see exact indexed counts and omissions; the public repository does not contain the generated corpus.
+
+In the supplied local folders, the builder indexed **51,288 HTML pages**, **2,025 extracted PDF pages**, and **9 text files** across CANoe 14 and vTESTstudio 3/6; all **33 CHMs** and **68 PDFs** were processed with **zero reported text-extraction omissions**. These numbers include overlapping Help copies, not that many unique APIs. Images, JavaScript, CSS, binary spreadsheets, and the unsupplied CANoe 19 Help are outside this text index. The generated private database is about 160 MB and is ignored by Git.
 
 The source folders provided for analysis contained **8,375** CANoe HTML topics, **2,924** vTESTstudio 3 CHM HTML topics, **3,853** vTESTstudio 6 CHM HTML topics, and 57 PDFs in CANoe `Doc`. These are inventory counts, not a claim that every line has been manually reviewed. The published skill is an original, curated navigation and workflow layer. See [source register](skills/vector-canoe-vtest/references/sources.md).
 
@@ -39,7 +43,7 @@ VECTOR-skills/
 ├── skills/vector-canoe-vtest/
 │   ├── SKILL.md                                # Canonical instructions
 │   ├── references/                            # Versioned, original summaries
-│   └── scripts/search_help.py                 # Search your own local HTML Help
+│   └── scripts/                              # Build/query private local Help corpus
 ├── gemini/GEM_INSTRUCTIONS.md                 # Paste into a Gemini Gem
 ├── assets/workflow.svg                        # Original diagram
 ├── VERSION
@@ -47,7 +51,28 @@ VECTOR-skills/
 └── LICENSE
 ```
 
-The wrappers link to the canonical skill so cross-platform guidance stays consistent. They need the **whole repository** or a copy preserving the relative paths. No Vector proprietary manuals are bundled.
+The wrappers link to the canonical skill so cross-platform guidance stays consistent. They need the **whole repository** or a copy preserving the relative paths. No Vector proprietary manuals are bundled. `skills/vector-canoe-vtest/scripts/local_corpus.py` builds a private resource from the user's own installed Help.
+
+### Build the comprehensive private resource locally
+
+From the repository root, with the three source folders next to the repository:
+
+```powershell
+python skills/vector-canoe-vtest/scripts/local_corpus.py build `
+  --input "CANoe14=..\CANoe14" `
+  --input "vTESTstudio3=..\vTESTstudio3" `
+  --input "vTESTstudio6=..\vTESTstudio6" `
+  --output ".local-vector-help\corpus.sqlite"
+
+python skills/vector-canoe-vtest/scripts/local_corpus.py lookup `
+  --db ".local-vector-help\corpus.sqlite" sysGetVariableString `
+  --product CANoe14 --full
+
+python skills/vector-canoe-vtest/scripts/local_corpus.py stats `
+  --db ".local-vector-help\corpus.sqlite"
+```
+
+The resource stays on your computer. For PDFs, install `pypdf` locally first; otherwise PDF files are reported as omissions. On Windows, the tool uses `hh.exe` to extract local CHMs into an ignored cache. Images, executable scripts, and binary spreadsheets are not converted into searchable text. See [build/query/coverage details](skills/vector-canoe-vtest/references/local-corpus.md).
 
 ## Install and use
 
@@ -61,7 +86,7 @@ Clone the repository into your project so Claude Code can discover `.claude/skil
 
 ### Gemini Gem
 
-Create a Gem, paste the block in [GEM_INSTRUCTIONS.md](gemini/GEM_INSTRUCTIONS.md) into its **Instructions**, and optionally attach the original `skills/vector-canoe-vtest/references/*.md` as knowledge. Re-upload these reference files after updating the Gem. A Gem uses instructions and knowledge attachments; it does not execute this repository's `SKILL.md` as a local coding skill.
+Create a Gem, paste the block in [GEM_INSTRUCTIONS.md](gemini/GEM_INSTRUCTIONS.md) into its **Instructions**, and optionally attach the original `skills/vector-canoe-vtest/references/*.md` as knowledge. Re-upload these reference files after updating the Gem. A Gem does not execute the repository's `SKILL.md` or access the private local corpus; full offline lookup is available to coding agents with access to the local files, not to a standalone Gem.
 
 ### Search your own installed Help
 
@@ -97,6 +122,8 @@ Vector links to the [CANoe DE Family online Help](https://help.vector.com/CANoeD
 
 ## Releases, authorship, and rights
 
-Skill releases use [Semantic Versioning](CHANGELOG.md) and the root [VERSION](VERSION) file; Git tags `vX.Y.Z` can identify published snapshots. Product versions are separate: **skill v0.2.0** is not CANoe 0.2.0. Contributions should identify the product version/service pack, source URL or local topic path, and verification status. Do not submit Vector copyrighted manuals or screenshots without permission.
+Skill releases use [Semantic Versioning](CHANGELOG.md) and the root [VERSION](VERSION) file; Git tags `vX.Y.Z` can identify published snapshots. Product versions are separate: **skill v0.3.0** is not CANoe 0.3.0. Contributions should identify the product version/service pack, source URL or local topic path, and verification status. Do not submit Vector copyrighted manuals, extracted CHMs, generated private databases, or screenshots without permission.
 
 Created and maintained by **Patiphan Phakdeeburi (TOPTUBBY)**. The repository's original code and written skill content are MIT licensed. **Vector**, **CANoe**, and **vTESTstudio** are names of Vector Informatik GmbH; the project is independent and is not endorsed by Vector. The MIT license does not apply to Vector's documentation or software.
+
+Vector's [terms and conditions](https://www.vector.com/en/company/get-info/terms-and-conditions/) say that copying/distributing Vector-provided content requires express authorization. This repository therefore distributes the indexing tool and original guidance, while the user's generated Help corpus remains private on their own computer.

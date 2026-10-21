@@ -13,6 +13,8 @@
 
 Counts describe inspected `.htm` topics in the specified roots, not all pages or a semantic audit of every line. The skill contains a curated map and original summaries. It does not bundle, mirror, or relicense Vector's manuals, CHMs, PDFs, images, or API reference text.
 
+The optional **private on-device index** built from the supplied folders on 2026-10-21 counted 51,288 HTML pages, 2,025 PDF pages, and 9 text files after extracting 33 CHMs and 68 PDFs. It reported zero text-extraction omissions. This count includes overlapping HTML/CHM copies and does not include image-only content, scripts, stylesheets, or spreadsheets. The generated database is excluded from this public repository.
+
 ## Official online sources
 
 - [Vector support and Product Docs / Help](https://www.vector.com/en/services/support/)

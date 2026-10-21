@@ -10,4 +10,4 @@ Official sources: https://help.vector.com/CANoeDEFamily/index.html ; https://www
 
 --- END GEM INSTRUCTIONS ---
 
-Gem knowledge is a snapshot: update the uploaded `.md` references after new repository releases. Gemini Gems do not execute a repository `SKILL.md` automatically; the pasted instructions are the activation mechanism.
+Gem knowledge is a snapshot: update the uploaded original `.md` references after new repository releases. Gemini Gems do not execute a repository `SKILL.md`, local Python script, or SQLite database automatically. This public Gem cannot contain the full proprietary Help corpus; verify functions in authorized Vector Help and follow your organization's rules before providing source excerpts to a cloud service.

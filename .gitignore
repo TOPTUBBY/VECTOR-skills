@@ -1,0 +1,8 @@
+# Generated private copies/indexes of user-supplied Vector documentation
+.local-vector-help/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite.building
+__pycache__/
+*.pyc
