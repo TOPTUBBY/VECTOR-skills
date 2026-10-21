@@ -265,6 +265,8 @@ def function_card(row):
         if key in SECTION_NAMES:
             current = SECTION_NAMES[key]
             sections.setdefault(current, [])
+            if key.startswith("availability "):
+                sections[current].append(line)
         elif key in ("see also", "related topics", "class"):
             current = None
         elif current:
@@ -276,7 +278,9 @@ def function_card(row):
     fields = {key: "\n".join(lines).strip() for key, lines in sections.items() if lines}
     if syntax and not fields.get("syntax"):
         fields["syntax"] = syntax
+    versions = re.findall(r"(?m)^Version\s+\d+[^\n]*$", body[-1000:])
     return {"product": product, "kind": kind, "title": title, "source": source,
+            "topic_version": versions[-1] if versions else None,
             "fields": fields, "section_parser": "best-effort; inspect the full topic"}
 
 
@@ -300,6 +304,8 @@ def card(args):
     else:
         for item in cards:
             print(f"\n{item['title']} [{item['product']}]\nSource: {item['source']}")
+            if item["topic_version"]:
+                print("Topic version: " + item["topic_version"])
             for key, value in item["fields"].items():
                 print(f"{key}:\n{value[:args.max_chars]}")
                 if len(value) > args.max_chars:
