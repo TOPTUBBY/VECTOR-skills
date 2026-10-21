@@ -11,6 +11,7 @@ Source root: `CANoe14/Help01/CANoeCANalyzerHTML5/Content/Topics/`. The inspected
 | Legacy test environment/test modules | `CANoeCANalyzer/Windows/TestEnvironments/TestEnvironment.htm` |
 | General test functions | `CANoeCANalyzer/Test/` and `TestCommands/` |
 | CAPL signatures by bus | `CAPLFunctions/<bus>/` |
+| Common CAPL starter examples | [CAPL basics](capl-basics.md); confirm exact function page in `CAPLFunctions/` |
 | COM automation | `COMInterface/` and `Doc/AN-AND-1-117_CANalyzer_CANoe_as_a_COM_server.pdf` |
 | .NET interface | `Help01/VectorCANoeNetAPI.chm` and `Doc/AN-IND-1-011_Using_CANoe_NET_API.pdf` |
 | Diagnostics / DoIP | `CANoeCANalyzer/Diagnostics/`, `Doc/AN-IND-1-001_CANoe_CANalyzer_as_Diagnostic_Tools.pdf`, `Doc/AN-IND-1-026_DoIP_in_CANoe.pdf` |

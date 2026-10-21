@@ -9,7 +9,7 @@ description: Assist with Vector CANoe configuration, CAPL, network simulation, m
 
 1. Identify the installed CANoe version/service pack, vTESTstudio version/service pack, bus/option, hardware, and whether the task is simulation, analysis, diagnostics, or test execution. Ask only for missing facts that change the answer; otherwise state assumptions.
 2. Treat CANoe as the runtime for measurement, simulation, diagnostics, and tests. Treat vTESTstudio as the test design and build environment. A network node simulates behavior in CANoe's Simulation Setup; a test unit executes checks and stimuli in a CANoe test configuration. Do not conflate these roles.
-3. For CANoe 14 details read [CANoe 14](references/canoe14.md). For vTESTstudio 3 or 6 read the corresponding [v3](references/vteststudio3.md) or [v6](references/vteststudio6.md) reference. For cross-version execution and migration always read [compatibility](references/compatibility.md). For CANoe 19 and source limitations read [CANoe 19](references/canoe19.md).
+3. For CAPL syntax questions, start with [CAPL basics](references/capl-basics.md), then check the named Help topic. For CANoe 14 details read [CANoe 14](references/canoe14.md). For vTESTstudio 3 or 6 read the corresponding [v3](references/vteststudio3.md) or [v6](references/vteststudio6.md) reference. For cross-version execution and migration always read [compatibility](references/compatibility.md). For CANoe 19 and source limitations read [CANoe 19](references/canoe19.md).
 
 ## Work from evidence
 
@@ -29,6 +29,7 @@ description: Assist with Vector CANoe configuration, CAPL, network simulation, m
 ## References
 
 - [CANoe 14 local map](references/canoe14.md)
+- [CAPL basics: timers, writeEx, sysGetVariableString](references/capl-basics.md)
 - [vTESTstudio 3 local map](references/vteststudio3.md)
 - [vTESTstudio 6 local map](references/vteststudio6.md)
 - [CANoe 19 online status and comparison](references/canoe19.md)

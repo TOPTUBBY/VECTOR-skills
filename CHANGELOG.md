@@ -2,6 +2,11 @@
 
 This project versions its **skill content**, independently of CANoe and vTESTstudio product versions. Releases use Semantic Versioning (`MAJOR.MINOR.PATCH`). Major: incompatible skill structure or behavior; minor: new product/version references or substantial guidance; patch: corrections, links, and wording. A tag such as `v0.1.0` marks an immutable skill snapshot.
 
+## 0.2.0 — 2026-10-21
+
+- Added a CAPL starter reference for `msTimer`, `setTimer`, `on timer`, `writeEx`, `writeLineEx`, and `sysGetVariableString`, verified against the local CANoe 14 SP2 Help.
+- Routed CAPL syntax questions to exact versioned Help topics and marked CANoe 19 API details for online verification.
+
 ## 0.1.0 — 2026-10-20
 
 - Initial cross-platform skill for Codex/ChatGPT Work, Claude Code, and Gemini Gem.

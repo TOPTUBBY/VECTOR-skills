@@ -1,7 +1,7 @@
 # VECTOR Skills
 
 **Community AI skills for Vector CANoe and vTESTstudio**  
-Maintainer: **Patiphan Phakdeeburi (TOPTUBBY)** · Skill version: **0.1.0** · [MIT license](LICENSE)
+Maintainer: **Patiphan Phakdeeburi (TOPTUBBY)** · Skill version: **0.2.0** · [MIT license](LICENSE)
 
 > คู่มือช่วยให้ AI แยกบทบาท CANoe กับ vTESTstudio, อ้างอิงเอกสารตามเวอร์ชัน, และตรวจ compatibility ก่อนแนะนำขั้นตอนหรือเขียน CAPL/test unit เอกสารต้นฉบับของ Vector อยู่ในเครื่องผู้ใช้และไม่ได้อัปโหลดลงรีโปสาธารณะ
 
@@ -15,6 +15,8 @@ Maintainer: **Patiphan Phakdeeburi (TOPTUBBY)** · Skill version: **0.1.0** · [
 | vTESTstudio 3.0 SP3 | Local Help CHM, concept/migration manuals and release notes | Test editors, parameters/variants, build and `.vtuexe`, traceability |
 | vTESTstudio 6 SP3 | Local Help CHM, concept manual and release notes | Newer test design, Distributed Objects, fuzzing, state diagrams, migration caveats |
 | CANoe 19 | Vector's online Help/release links, official announcement, compatibility matrix | Bounded comparison to 14, links to verify current details; no claim of full v19 Help ingestion |
+
+The [CAPL basics guide](skills/vector-canoe-vtest/references/capl-basics.md) now covers `msTimer`, `setTimer`, `on timer`, `writeEx`, and `sysGetVariableString` with CANoe 14 SP2 syntax, short examples, and local Help topic paths. It is a starter guide, not a complete function catalog; the skill instructs an AI to check the matching Help for any other function or version.
 
 The source folders provided for analysis contained **8,375** CANoe HTML topics, **2,924** vTESTstudio 3 CHM HTML topics, **3,853** vTESTstudio 6 CHM HTML topics, and 57 PDFs in CANoe `Doc`. These are inventory counts, not a claim that every line has been manually reviewed. The published skill is an original, curated navigation and workflow layer. See [source register](skills/vector-canoe-vtest/references/sources.md).
 
@@ -95,6 +97,6 @@ Vector links to the [CANoe DE Family online Help](https://help.vector.com/CANoeD
 
 ## Releases, authorship, and rights
 
-Skill releases use [Semantic Versioning](CHANGELOG.md) and the root [VERSION](VERSION) file; Git tags `vX.Y.Z` identify published snapshots. Product versions are separate: **skill v0.1.0** is not CANoe 0.1.0. Contributions should identify the product version/service pack, source URL or local topic path, and verification status. Do not submit Vector copyrighted manuals or screenshots without permission.
+Skill releases use [Semantic Versioning](CHANGELOG.md) and the root [VERSION](VERSION) file; Git tags `vX.Y.Z` can identify published snapshots. Product versions are separate: **skill v0.2.0** is not CANoe 0.2.0. Contributions should identify the product version/service pack, source URL or local topic path, and verification status. Do not submit Vector copyrighted manuals or screenshots without permission.
 
 Created and maintained by **Patiphan Phakdeeburi (TOPTUBBY)**. The repository's original code and written skill content are MIT licensed. **Vector**, **CANoe**, and **vTESTstudio** are names of Vector Informatik GmbH; the project is independent and is not endorsed by Vector. The MIT license does not apply to Vector's documentation or software.
