@@ -6,6 +6,7 @@ extracted CHM files contain third-party documentation and must stay local.
 """
 
 import argparse
+import json
 from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
@@ -244,6 +245,83 @@ def display(row, full=False, max_chars=1600):
         print(f"… {len(body) - max_chars} more characters; use --full for the local page")
 
 
+SECTION_NAMES = {
+    "function syntax": "syntax", "syntax": "syntax", "method syntax": "syntax",
+    "function": "purpose", "description": "purpose", "parameters": "parameters", "parameter": "parameters",
+    "return values": "return_values", "return value": "return_values",
+    "availability": "availability", "availability canoe": "availability",
+    "availability vteststudio": "availability", "example": "examples", "examples": "examples",
+    "note": "notes", "notes": "notes", "version extensions": "version_extensions",
+}
+
+
+def function_card(row):
+    """Separate exact local topic sections; retain the full page for ambiguous layouts."""
+    product, kind, source, title, syntax, body = row
+    sections = {}
+    current = None
+    for line in body.splitlines():
+        key = " ".join(line.casefold().split())
+        if key in SECTION_NAMES:
+            current = SECTION_NAMES[key]
+            sections.setdefault(current, [])
+        elif key in ("see also", "related topics", "class"):
+            current = None
+        elif current:
+            # Product/version footer ends the topic's functional sections.
+            if re.fullmatch(r"Version\s+\d+.*", line) or line.startswith("©"):
+                current = None
+            else:
+                sections[current].append(line)
+    fields = {key: "\n".join(lines).strip() for key, lines in sections.items() if lines}
+    if syntax and not fields.get("syntax"):
+        fields["syntax"] = syntax
+    return {"product": product, "kind": kind, "title": title, "source": source,
+            "fields": fields, "section_parser": "best-effort; inspect the full topic"}
+
+
+def exact_rows(db, name, product=None, limit=20):
+    return db.execute("""
+      SELECT product, kind, source, title, syntax, body FROM documents
+      WHERE (lower(title)=lower(?) OR lower(source) LIKE lower(?))
+        AND (? IS NULL OR lower(product)=lower(?))
+      ORDER BY CASE WHEN lower(title)=lower(?) THEN 0 ELSE 1 END,
+        CASE WHEN source LIKE 'local/%' THEN 0 ELSE 1 END, product, source
+      LIMIT ?
+    """, (name, "%/caplfunction" + name + ".htm", product, product, name, limit)).fetchall()
+
+
+def card(args):
+    with connect(args.db) as db:
+        rows = exact_rows(db, args.name, args.product, args.limit)
+    cards = [function_card(row) for row in rows]
+    if args.json:
+        print(json.dumps(cards, ensure_ascii=False, indent=2))
+    else:
+        for item in cards:
+            print(f"\n{item['title']} [{item['product']}]\nSource: {item['source']}")
+            for key, value in item["fields"].items():
+                print(f"{key}:\n{value[:args.max_chars]}")
+                if len(value) > args.max_chars:
+                    print(f"… {len(value) - args.max_chars} more characters; use --max-chars")
+        print(f"\nMatches: {len(cards)}; parsed sections need confirmation in lookup --full")
+
+
+def compare(args):
+    with connect(args.db) as db:
+        rows = exact_rows(db, args.name, limit=100)
+    by_product = {}
+    for row in rows:
+        by_product.setdefault(row[0], function_card(row))
+    for product, item in sorted(by_product.items()):
+        print(f"{product} | {item['source']}\n  Syntax: {item['fields'].get('syntax', '(not parsed)')}")
+    signatures = {p: c["fields"].get("syntax", "") for p, c in by_product.items()}
+    normalized = {"\n".join(line.strip().rstrip(";") for line in value.splitlines())
+                  for value in signatures.values()}
+    print(f"Comparison: {'same extracted signature after punctuation normalization' if len(normalized) == 1 and all(signatures.values()) else 'different or missing extracted syntax'}")
+    print("This compares local text only; check overloads, semantics, applicability, and current official Help.")
+
+
 def lookup(args):
     with connect(args.db) as db:
         # Exact title first; filenames provide a fallback for differently cased titles.
@@ -314,6 +392,9 @@ def refresh_syntax(args):
 
 
 def main():
+    # Windows legacy consoles may default to a code page that cannot print Help text.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     p = argparse.ArgumentParser(description=__doc__)
     sub = p.add_subparsers(dest="command", required=True)
     b = sub.add_parser("build", help="Index locally owned documentation")
@@ -332,6 +413,18 @@ def main():
         q.add_argument("--max-chars", type=int, default=1600)
         q.add_argument("--full", action="store_true", help="Show entire local page")
         q.set_defaults(func=function)
+    c = sub.add_parser("card", help="Extract sections from an exact local function topic")
+    c.add_argument("--db", type=Path, required=True)
+    c.add_argument("name")
+    c.add_argument("--product")
+    c.add_argument("--limit", type=int, default=5)
+    c.add_argument("--max-chars", type=int, default=3000)
+    c.add_argument("--json", action="store_true")
+    c.set_defaults(func=card)
+    c = sub.add_parser("compare", help="Compare local function signatures by product label")
+    c.add_argument("--db", type=Path, required=True)
+    c.add_argument("name")
+    c.set_defaults(func=compare)
     s = sub.add_parser("stats", help="Show index coverage and omissions")
     s.add_argument("--db", type=Path, required=True)
     s.add_argument("--limit", type=int, default=15)

@@ -2,6 +2,12 @@
 
 This project versions its **skill content**, independently of CANoe and vTESTstudio product versions. Releases use Semantic Versioning (`MAJOR.MINOR.PATCH`). Major: incompatible skill structure or behavior; minor: new product/version references or substantial guidance; patch: corrections, links, and wording. A tag such as `v0.1.0` marks an immutable skill snapshot.
 
+## 0.4.0 — 2026-10-21
+
+- Added structured, on-device function cards and extracted-signature comparisons across the supplied product versions.
+- Added a source-category map and a protocol for confirming local Help against independent official versioned material before answering syntax questions.
+- Clarified that a parsed card or matching signature is not a substitute for reading the full topic and checking execution context; the private corpus remains local.
+
 ## 0.3.0 — 2026-10-21
 
 - Added a private local corpus builder and query tool for available HTML Help, locally extracted CHM, text files, and optional PDF text. The supplied folders yielded 51,288 HTML pages, 2,025 PDF pages, and 9 text files from 33 CHMs and 68 PDFs, with zero extraction omissions reported.

@@ -36,9 +36,13 @@ python skills/vector-canoe-vtest/scripts/local_corpus.py lookup --db ".local-vec
 python skills/vector-canoe-vtest/scripts/local_corpus.py lookup --db ".local-vector-help\corpus.sqlite" sysGetVariableString --product CANoe14 --full
 python skills/vector-canoe-vtest/scripts/local_corpus.py search --db ".local-vector-help\corpus.sqlite" "test configuration" --limit 5
 python skills/vector-canoe-vtest/scripts/local_corpus.py stats --db ".local-vector-help\corpus.sqlite"
+python skills/vector-canoe-vtest/scripts/local_corpus.py card --db ".local-vector-help\corpus.sqlite" writeEx --product CANoe14
+python skills/vector-canoe-vtest/scripts/local_corpus.py compare --db ".local-vector-help\corpus.sqlite" sysGetVariableString
 ```
 
 `msTimer` is a type and may be documented under `on timer`/`setTimer`, so search for those entries if an exact-title lookup finds none. `lookup` searches exact titles and matching CAPL function filenames. `search` performs a literal text search across indexed pages. `--full` prints the full **local** page; default output is abbreviated for model context. For CAPL answers, cite the `Source:` path and match the version/service pack. If `stats` lists omissions, disclose them.
+
+`card` separates a matching local topic into syntax, purpose, parameters, return values, availability, examples and notes where recognizable. `--json` supports local tooling; `--max-chars` controls printed section length. The parser is best effort and `examples` can contain only links to other functions. `compare` reports extracted signatures per locally indexed product; it does not establish identical semantics. Follow the [verification protocol](answer-protocol.md) before answering. Neither command calls an online service.
 
 ## Limits and handling
 

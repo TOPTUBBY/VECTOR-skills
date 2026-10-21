@@ -9,7 +9,7 @@ description: Assist with Vector CANoe configuration, CAPL, network simulation, m
 
 1. Identify the installed CANoe version/service pack, vTESTstudio version/service pack, bus/option, hardware, and whether the task is simulation, analysis, diagnostics, or test execution. Ask only for missing facts that change the answer; otherwise state assumptions.
 2. Treat CANoe as the runtime for measurement, simulation, diagnostics, and tests. Treat vTESTstudio as the test design and build environment. A network node simulates behavior in CANoe's Simulation Setup; a test unit executes checks and stimuli in a CANoe test configuration. Do not conflate these roles.
-3. For CAPL syntax questions, query the private local corpus with `scripts/local_corpus.py lookup --db <private-db> <function> --product CANoe14 --full` when the user's licensed Help is available; include signatures, parameters, return values, availability, and examples from the matching topic. [CAPL basics](references/capl-basics.md) is a starter guide for the three common examples. For CANoe 14 details read [CANoe 14](references/canoe14.md). For vTESTstudio 3 or 6 read the corresponding [v3](references/vteststudio3.md) or [v6](references/vteststudio6.md) reference. For cross-version execution and migration always read [compatibility](references/compatibility.md). For CANoe 19 and source limitations read [CANoe 19](references/canoe19.md).
+3. For every exact CAPL function/type/command question, follow [the function-answer protocol](references/answer-protocol.md): run `scripts/local_corpus.py card --db <private-db> <name> --product <label>`, inspect the matching `lookup --full` topic, use `compare` for version differences, and independently check the exact installed or official current Help. Include signatures, parameters, return values, availability, and a short original example only where supported. Never invent an example for an undocumented context. [CAPL basics](references/capl-basics.md) is a starter guide, not the complete catalog. For CANoe 14 read [CANoe 14](references/canoe14.md); for vTESTstudio 3/6 read [v3](references/vteststudio3.md) or [v6](references/vteststudio6.md). For migration read [compatibility](references/compatibility.md); for CANoe 19 read [CANoe 19](references/canoe19.md).
 
 ## Work from evidence
 
@@ -31,6 +31,8 @@ description: Assist with Vector CANoe configuration, CAPL, network simulation, m
 - [CANoe 14 local map](references/canoe14.md)
 - [CAPL basics: timers, writeEx, sysGetVariableString](references/capl-basics.md)
 - [Private full Help corpus: build, query, coverage](references/local-corpus.md)
+- [Function-answer verification protocol](references/answer-protocol.md)
+- [Documentation coverage and domain map](references/domain-map.md)
 - [vTESTstudio 3 local map](references/vteststudio3.md)
 - [vTESTstudio 6 local map](references/vteststudio6.md)
 - [CANoe 19 online status and comparison](references/canoe19.md)

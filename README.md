@@ -1,7 +1,7 @@
 # VECTOR Skills
 
 **Community AI skills for Vector CANoe and vTESTstudio**  
-Maintainer: **Patiphan Phakdeeburi (TOPTUBBY)** · Skill version: **0.3.0** · [MIT license](LICENSE)
+Maintainer: **Patiphan Phakdeeburi (TOPTUBBY)** · Skill version: **0.4.0** · [MIT license](LICENSE)
 
 > คู่มือช่วยให้ AI แยกบทบาท CANoe กับ vTESTstudio, อ้างอิงเอกสารตามเวอร์ชัน, และตรวจ compatibility ก่อนแนะนำขั้นตอนหรือเขียน CAPL/test unit เอกสารต้นฉบับของ Vector อยู่ในเครื่องผู้ใช้และไม่ได้อัปโหลดลงรีโปสาธารณะ
 
@@ -19,6 +19,8 @@ Maintainer: **Patiphan Phakdeeburi (TOPTUBBY)** · Skill version: **0.3.0** · [
 The [CAPL basics guide](skills/vector-canoe-vtest/references/capl-basics.md) now covers `msTimer`, `setTimer`, `on timer`, `writeEx`, and `sysGetVariableString` with CANoe 14 SP2 syntax, short examples, and local Help topic paths. It is a starter guide, not a complete function catalog; the skill instructs an AI to check the matching Help for any other function or version.
 
 **Full function coverage from your own installation:** [build a private local corpus](skills/vector-canoe-vtest/references/local-corpus.md) with `local_corpus.py`. It indexes supplied HTML Help and locally extracted CHM pages, preserves each page's full local text and examples, and extracts recognizable function syntax for exact-name lookup. Optional `pypdf` adds PDF page text. Run `stats` to see exact indexed counts and omissions; the public repository does not contain the generated corpus.
+
+For a function question, `card` separates the matching topic into syntax, purpose, parameters, return values and availability; `lookup --full` retains the exact local page for checking parser errors; `compare` displays extracted signatures across supplied products. The [answer protocol](skills/vector-canoe-vtest/references/answer-protocol.md) then checks the original topic and an independent official source for the exact version and CAPL context. These tools cover indexed text, not a manually verified catalog of every API. The [domain map](skills/vector-canoe-vtest/references/domain-map.md) routes broader CANoe and vTESTstudio questions to their source categories.
 
 In the supplied local folders, the builder indexed **51,288 HTML pages**, **2,025 extracted PDF pages**, and **9 text files** across CANoe 14 and vTESTstudio 3/6; all **33 CHMs** and **68 PDFs** were processed with **zero reported text-extraction omissions**. These numbers include overlapping Help copies, not that many unique APIs. Images, JavaScript, CSS, binary spreadsheets, and the unsupplied CANoe 19 Help are outside this text index. The generated private database is about 160 MB and is ignored by Git.
 
@@ -67,6 +69,12 @@ python skills/vector-canoe-vtest/scripts/local_corpus.py build `
 python skills/vector-canoe-vtest/scripts/local_corpus.py lookup `
   --db ".local-vector-help\corpus.sqlite" sysGetVariableString `
   --product CANoe14 --full
+
+python skills/vector-canoe-vtest/scripts/local_corpus.py card `
+  --db ".local-vector-help\corpus.sqlite" writeEx --product CANoe14
+
+python skills/vector-canoe-vtest/scripts/local_corpus.py compare `
+  --db ".local-vector-help\corpus.sqlite" sysGetVariableString
 
 python skills/vector-canoe-vtest/scripts/local_corpus.py stats `
   --db ".local-vector-help\corpus.sqlite"
@@ -122,7 +130,7 @@ Vector links to the [CANoe DE Family online Help](https://help.vector.com/CANoeD
 
 ## Releases, authorship, and rights
 
-Skill releases use [Semantic Versioning](CHANGELOG.md) and the root [VERSION](VERSION) file; Git tags `vX.Y.Z` can identify published snapshots. Product versions are separate: **skill v0.3.0** is not CANoe 0.3.0. Contributions should identify the product version/service pack, source URL or local topic path, and verification status. Do not submit Vector copyrighted manuals, extracted CHMs, generated private databases, or screenshots without permission.
+Skill releases use [Semantic Versioning](CHANGELOG.md) and the root [VERSION](VERSION) file; Git tags `vX.Y.Z` can identify published snapshots. Product versions are separate: **skill v0.4.0** is not CANoe 0.4.0. Contributions should identify the product version/service pack, source URL or local topic path, and verification status. Do not submit Vector copyrighted manuals, extracted CHMs, generated private databases, or screenshots without permission.
 
 Created and maintained by **Patiphan Phakdeeburi (TOPTUBBY)**. The repository's original code and written skill content are MIT licensed. **Vector**, **CANoe**, and **vTESTstudio** are names of Vector Informatik GmbH; the project is independent and is not endorsed by Vector. The MIT license does not apply to Vector's documentation or software.
 
